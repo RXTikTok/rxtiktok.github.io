@@ -1,0 +1,22 @@
+{
+  "name": "RXTikTok",
+  "identifier": "com.zhiliaoapp.musically",
+  "apps": [
+    {
+      "beta": false,
+      "name": "RXTikTok",
+      "bundleIdentifier": "com.zhiliaoapp.musically",
+      "developerName": "raulsaeed",
+      "subtitle": "An awesome TikTok Tweak.",
+      "version": "1.4.5",
+      "versionDate": "2025-08-11T11:36:00+02:00",
+      "versionDescription": "",
+      "downloadURL": "https://github.com/raulsaeed/RXRepo.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa",
+      "localizedDescription": "Changelog 1.4.5: https://t.me/BHTikTokPlusPlus/194",
+      "iconURL": "https://github.com/raulsaeed/RXRepo.github.io/blob/main/RXLogo.jpg?raw=true",
+      "tintColor": "9b54fd",
+      "size": 316025922,
+      "screenshotURLs": []
+    }
+  ]
+}

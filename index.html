@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RXTikTok Repository</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 40px; height: 40px; top: 40%; left: 60%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 100px; height: 100px; top: 80%; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(5) { width: 50px; height: 50px; top: 10%; left: 70%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            border-radius: 30px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: pulse 2s ease-in-out infinite alternate;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .logo-fallback {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.3),
+                0 16px 40px rgba(102, 126, 234, 0.2),
+                0 24px 60px rgba(102, 126, 234, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 35px rgba(102, 126, 234, 0.4),
+                0 25px 50px rgba(102, 126, 234, 0.3),
+                0 35px 80px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .download-icon {
+            font-size: 1.3rem;
+            animation: bounce 2s infinite;
+        }
+
+        .download-size {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .repos-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .repo-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .repo-card:hover::before {
+            left: 100%;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .repo-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .repo-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .esign { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .gbox { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .feather { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .altstore { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .scarlet { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .krava { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+
+        .repo-title {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .repo-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .repo-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .manual-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manual-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+
+        .purchase-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .purchase-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 180deg, transparent, rgba(255,107,107,0.1), transparent);
+            animation: rotate 15s linear infinite;
+            z-index: -1;
+        }
+
+        .purchase-title {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .purchase-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .payment-card:hover::before {
+            left: 100%;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .payment-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .payment-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .paypal-card .payment-icon {
+            background: linear-gradient(135deg, #0070ba, #003087);
+        }
+
+        .crypto-card .payment-icon {
+            background: linear-gradient(135deg, #f7931a, #ff6b35);
+        }
+
+        .card-payment .payment-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .payment-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .payment-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .payment-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .paypal-btn {
+            background: linear-gradient(135deg, #0070ba, #003087);
+        }
+
+        .crypto-btn {
+            background: linear-gradient(135deg, #f7931a, #ff6b35);
+        }
+
+        .card-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .purchase-note {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .purchase-note p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .manual-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-container {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .url-display {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin-bottom: 1rem;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .repos-section {
+                grid-template-columns: 1fr;
+            }
+
+            .repo-card {
+                padding: 1.5rem;
+            }
+
+            .manual-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <img src="RXLogo.jpg" alt="RXTikTok Logo" class="logo-img" onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex';">
+            <div class="logo-fallback" style="display: none;">RX</div>
+            <h1>RXTikTok Repository</h1>
+            <p class="subtitle">Add RXTikTok to your favorite iOS app installer with one click. Choose from multiple signing services below.</p>
+            
+            <div class="download-section">
+                <button class="download-btn" onclick="downloadIPA()">
+                    <span class="download-icon">⬇️</span>
+                    Download RXTikTok v1.4.5
+                    <span class="download-size">(301 MB)</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="repos-section">
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/esign.webp" alt="eSign" class="repo-icon esign" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">eSign</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="esign://addsource?url=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to eSign</a>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/gbox.png" alt="GBox" class="repo-icon gbox" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">GBox</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="gbox://AddSource/https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to GBox</a>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/feather.png" alt="Feather" class="repo-icon feather" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">Feather</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="feather://source/https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to Feather</a>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/altstore.png" alt="AltStore" class="repo-icon altstore" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">AltStore</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="altstore://source?url=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to AltStore</a>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/scarlet.webp" alt="Scarlet" class="repo-icon scarlet" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">Scarlet</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="scarlet://repo=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to Scarlet</a>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <img src="icons/kravasign.png" alt="KravaSigner" class="repo-icon krava" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover;">
+                        <h3 class="repo-title">KravaSigner</h3>
+                    </div>
+                    <div class="repo-links">
+                        <a href="kravasigner://addRepo=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to KravaSigner</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="manual-section">
+                <h2 class="manual-title">
+                    <span>📝</span>
+                    Add Manually
+                </h2>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Copy the repository URL below and add it manually to your preferred app installer</p>
+                
+                <div class="copy-container">
+                    <div class="url-display" id="repoUrl">
+                        https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard()">
+                        📋 Copy Repository URL
+                    </button>
+                </div>
+            </section>
+
+            <section class="purchase-section">
+                <h2 class="purchase-title">
+                    <span>💳</span>
+                    Purchase RXTikTok - $4.00 - Lifetime access!
+                </h2>
+                <p class="purchase-subtitle">Choose your preferred payment method to get access to RXTikTok</p>
+                
+                <div class="payment-methods">
+                    <div class="payment-card paypal-card">
+                        <div class="payment-header">
+                            <div class="payment-icon">💰</div>
+                            <h3>PayPal & Cash App</h3>
+                        </div>
+                        <p class="payment-description">Quick and secure payment via PayPal or Cash App</p>
+                        <a href="https://t.me/xavierhernan" class="payment-btn paypal-btn" target="_blank">
+                            <span>📱</span>
+                            Contact @xavierhernan
+                        </a>
+                    </div>
+
+                    <div class="payment-card crypto-card">
+                        <div class="payment-header">
+                            <div class="payment-icon">₿</div>
+                            <h3>Cryptocurrency</h3>
+                        </div>
+                        <p class="payment-description">Pay with Bitcoin, Ethereum, and other cryptocurrencies</p>
+                        <a href="https://t.me/ashhadsaeed1" class="payment-btn crypto-btn" target="_blank">
+                            <span>🔐</span>
+                            Contact @ashhadsaeed1
+                        </a>
+                    </div>
+
+                    <div class="payment-card card-payment">
+                        <div class="payment-header">
+                            <div class="payment-icon">💳</div>
+                            <h3>Credit/Debit Card</h3>
+                        </div>
+                        <p class="payment-description">Pay instantly with your credit or debit card</p>
+                        <a href="https://buymeacoffee.com/raulsaeed79" class="payment-btn card-btn" target="_blank">
+                            <span>☕</span>
+                            Pay with Card
+                        </a>
+                    </div>
+                </div>
+
+                <div class="purchase-note">
+                    <p>💡 <strong>Note:</strong> After payment, you will get a license to activate the tweak.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>RXTikTok Repository - Built with ❤️ for the iOS community</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const url = 'https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json';
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = 'linear-gradient(135deg, #55a3ff, #003d82)';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #ff6b6b, #feca57)';
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please copy manually: ' + url);
+            });
+        }
+
+        function downloadIPA() {
+            const downloadUrl = 'https://github.com/raulsaeed/RXRepo.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa';
+            
+            // Create a temporary anchor element for download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'RXTikTok-v1.4.5.ipa';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Update button to show download started
+            const btn = document.querySelector('.download-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>⏳</span> Download Started... <span class="download-size">(301 MB)</span>';
+            btn.style.background = 'linear-gradient(135deg, #55a3ff, #003d82)';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            }, 3000);
+        }
+
+        // Add smooth scroll behavior for any internal links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all repo cards
+            document.querySelectorAll('.repo-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
