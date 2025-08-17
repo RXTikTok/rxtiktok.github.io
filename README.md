@@ -1,1 +1,0 @@
-Simple site for RXTikTok using github pages.
