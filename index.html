@@ -593,10 +593,10 @@
             <p class="subtitle">Add RXTikTok to your favorite iOS app installer with one click. Choose from multiple signing services below.</p>
             
             <div class="download-section">
-                <button class="download-btn" onclick="downloadIPA()">
+                <button class="download-btn" onclick="downloadIPA()" id="downloadBtn">
                     <span class="download-icon">⬇️</span>
-                    Download RXTikTok v1.4.5
-                    <span class="download-size">(301 MB)</span>
+                    <span id="downloadText">Loading...</span>
+                    <span class="download-size" id="downloadSize"></span>
                 </button>
             </div>
         </header>
@@ -609,7 +609,7 @@
                         <h3 class="repo-title">eSign</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="esign://addsource?url=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to eSign</a>
+                        <a href="esign://addsource?url=https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to eSign</a>
                     </div>
                 </div>
 
@@ -619,7 +619,7 @@
                         <h3 class="repo-title">GBox</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="gbox://AddSource/https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to GBox</a>
+                        <a href="gbox://AddSource/https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to GBox</a>
                     </div>
                 </div>
 
@@ -629,7 +629,7 @@
                         <h3 class="repo-title">Feather</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="feather://source/https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to Feather</a>
+                        <a href="feather://source/https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to Feather</a>
                     </div>
                 </div>
 
@@ -639,7 +639,7 @@
                         <h3 class="repo-title">AltStore</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="altstore://source?url=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to AltStore</a>
+                        <a href="altstore://source?url=https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to AltStore</a>
                     </div>
                 </div>
 
@@ -649,7 +649,7 @@
                         <h3 class="repo-title">Scarlet</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="scarlet://repo=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to Scarlet</a>
+                        <a href="scarlet://repo=https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to Scarlet</a>
                     </div>
                 </div>
 
@@ -659,7 +659,7 @@
                         <h3 class="repo-title">KravaSigner</h3>
                     </div>
                     <div class="repo-links">
-                        <a href="kravasigner://addRepo=https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json" class="repo-link">Add to KravaSigner</a>
+                        <a href="kravasigner://addRepo=https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json" class="repo-link">Add to KravaSigner</a>
                     </div>
                 </div>
             </section>
@@ -673,7 +673,7 @@
                 
                 <div class="copy-container">
                     <div class="url-display" id="repoUrl">
-                        https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json
+                        https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json
                     </div>
                     <button class="copy-btn" onclick="copyToClipboard()">
                         📋 Copy Repository URL
@@ -738,8 +738,32 @@
     </div>
 
     <script>
+        let appData = null;
+
+        async function loadAppData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json');
+                const data = await response.json();
+                appData = data.apps[0];
+                updateDownloadButton();
+            } catch (error) {
+                console.error('Failed to load app data:', error);
+                // Fallback to default values
+                document.getElementById('downloadText').textContent = 'Download RXTikTok';
+                document.getElementById('downloadSize').textContent = '';
+            }
+        }
+
+        function updateDownloadButton() {
+            if (appData) {
+                const sizeInMB = Math.round(appData.size / (1024 * 1024));
+                document.getElementById('downloadText').textContent = `Download ${appData.name} v${appData.version}`;
+                document.getElementById('downloadSize').textContent = `(${sizeInMB} MB)`;
+            }
+        }
+
         function copyToClipboard() {
-            const url = 'https://raw.githubusercontent.com/raulsaeed/RXRepo.github.io/refs/heads/main/source.json';
+            const url = 'https://raw.githubusercontent.com/RXTikTok/rxtiktok.github.io/refs/heads/main/source.json';
             navigator.clipboard.writeText(url).then(() => {
                 const btn = document.querySelector('.copy-btn');
                 const originalText = btn.textContent;
@@ -756,12 +780,15 @@
         }
 
         function downloadIPA() {
-            const downloadUrl = 'https://github.com/raulsaeed/RXRepo.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa';
+            if (!appData) {
+                alert('App data not loaded yet. Please try again.');
+                return;
+            }
             
             // Create a temporary anchor element for download
             const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = 'RXTikTok-v1.4.5.ipa';
+            link.href = appData.downloadURL;
+            link.download = `${appData.name}-v${appData.version}.ipa`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -769,7 +796,8 @@
             // Update button to show download started
             const btn = document.querySelector('.download-btn');
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<span>⏳</span> Download Started... <span class="download-size">(301 MB)</span>';
+            const sizeInMB = Math.round(appData.size / (1024 * 1024));
+            btn.innerHTML = `<span>⏳</span> Download Started... <span class="download-size">(${sizeInMB} MB)</span>`;
             btn.style.background = 'linear-gradient(135deg, #55a3ff, #003d82)';
             
             setTimeout(() => {
@@ -780,6 +808,8 @@
 
         // Add smooth scroll behavior for any internal links
         document.addEventListener('DOMContentLoaded', function() {
+            // Load app data when page loads
+            loadAppData();
             // Animate cards on scroll
             const observerOptions = {
                 threshold: 0.1,
