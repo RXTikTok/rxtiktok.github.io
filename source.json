@@ -1,22 +1,22 @@
 {
-  "name": "RXTikTok",
-  "identifier": "com.zhiliaoapp.musically",
-  "apps": [
-    {
-      "beta": false,
-      "name": "RXTikTok",
-      "bundleIdentifier": "com.zhiliaoapp.musically",
-      "developerName": "raulsaeed",
-      "subtitle": "An awesome TikTok Tweak.",
-      "version": "1.4.5",
-      "versionDate": "2025-08-11T11:36:00+02:00",
-      "versionDescription": "",
-      "downloadURL": "https://github.com/raulsaeed/RXRepo.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa",
-      "localizedDescription": "Changelog 1.4.5: https://t.me/BHTikTokPlusPlus/194",
-      "iconURL": "https://github.com/raulsaeed/RXRepo.github.io/blob/main/RXLogo.jpg?raw=true",
-      "tintColor": "9b54fd",
-      "size": 316025922,
-      "screenshotURLs": []
-    }
-  ]
+ "name": "RXTikTok",
+ "identifier": "com.zhiliaoapp.musically",
+ "apps": [
+  {
+   "beta": false,
+   "name": "RXTikTok",
+   "bundleIdentifier": "com.zhiliaoapp.musically",
+   "developerName": "raulsaeed",
+   "subtitle": "An awesome TikTok Tweak.",
+   "version": "1.4.5",
+   "versionDate": "2025-08-11T11:36:00+02:00",
+   "versionDescription": "",
+   "downloadURL": "https://github.com/RXTikTok/rxtiktok.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa",
+   "localizedDescription": "*CHANGELOG* **↓**\n*ADDED:*\n- HD Private Video Downloading (must be following user, obviously)\n- Anonymous Profile Viewing\n- Save Your RX Config to the Keychain\n- Disable Story Photo Auto-Advance\n- Story Video Looping\n- Remove TikTok Referral ADs\n- Mark As Read Upon Reply\n- Disable Screenshot & Screen Recording Detection in DMs\n- Instant RX Language Change (full restart still required for complete translation)\n- Code Optimization\n\n*FIXED:*\n- Liking Posts, DM Requests, Reposting\n- Photo Downloading\n- \"Saved\" Banner Dismissing\n- Offline Video Downloading\n- Profile Picture Downloading\n- USA Region (just added back to selection list, unsure if it works)\n- Offline Videos Slider (now counts properly)\n\n*CHANGED:*\n- Settings Style Re-Format\n\n*REMOVED:*\n- Creator Profile Pull (broken)\n- Extended Bio Character Limit (now server-sided)\n\nChangelog 1.4.5: https://t.me/BHTikTokPlusPlus/194",
+   "iconURL": "https://github.com/raulsaeed/RXRepo.github.io/blob/main/RXLogo.jpg?raw=true",
+   "tintColor": "9b54fd",
+   "size": 316025922,
+   "screenshotURLs": []
+  }
+ ]
 }
