@@ -1,0 +1,452 @@
+:root {
+    --bg-color: #E0C3FC;
+    --text-color: #000000;
+    --accent-primary: #ffb703;
+    /* Bright Yellow/Orange */
+    --accent-secondary: #02c39a;
+    /* Mint/Cyan */
+    --accent-tertiary: #fb8500;
+    /* Orange */
+    --border-color: #000000;
+    --border-width: 3px;
+    --shadow-offset: 5px;
+    --card-bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    /* Monospaced for that raw feel */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    border: var(--border-width) solid var(--border-color);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+}
+
+.logo-img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 0;
+    /* No rounded corners */
+    display: block;
+    object-fit: cover;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+}
+
+.logo-fallback {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    background: var(--accent-primary);
+    border: var(--border-width) solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 0px var(--accent-secondary);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+/* Download Button */
+.download-section {
+    margin-top: 2rem;
+}
+
+.download-btn {
+    background: var(--accent-secondary);
+    color: var(--text-color);
+    border: var(--border-width) solid var(--border-color);
+    padding: 1rem 2rem;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    transition: all 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-transform: uppercase;
+}
+
+.download-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px var(--border-color);
+}
+
+.download-btn:active {
+    transform: translate(var(--shadow-offset), var(--shadow-offset));
+    box-shadow: none;
+}
+
+.download-icon {
+    font-size: 1.5rem;
+}
+
+.download-size {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Repos Section */
+.repos-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.repo-card {
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--border-color);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    transition: all 0.1s;
+}
+
+.repo-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px 0px var(--border-color);
+    background-color: #fffef0;
+}
+
+.repo-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: var(--border-width) solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.repo-icon {
+    width: 50px;
+    height: 50px;
+    border: var(--border-width) solid var(--border-color);
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    /* Override gradients with flat white */
+    border-radius: 0 !important;
+    /* Force square */
+    object-fit: cover;
+}
+
+/* Remove gradient backgrounds from icons */
+.esign,
+.gbox,
+.feather,
+.altstore,
+.scarlet,
+.krava {
+    background: none;
+}
+
+.repo-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.repo-links {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.repo-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    background: var(--accent-primary);
+    color: var(--text-color);
+    text-decoration: none;
+    border: var(--border-width) solid var(--border-color);
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0px 0px var(--border-color);
+    transition: all 0.1s;
+}
+
+.repo-link:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0px 0px var(--border-color);
+}
+
+.repo-link:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+/* Manual Section */
+.manual-section {
+    background: var(--accent-tertiary);
+    /* Orange bg */
+    border: var(--border-width) solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    margin-bottom: 3rem;
+}
+
+.manual-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.url-display {
+    background: #ffffff;
+    border: var(--border-width) solid var(--border-color);
+    padding: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    word-break: break-all;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.copy-btn {
+    background: #ffffff;
+    color: #000;
+    border: var(--border-width) solid var(--border-color);
+    padding: 0.8rem 1.5rem;
+    font-family: inherit;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px 0px var(--border-color);
+    text-transform: uppercase;
+}
+
+.copy-btn:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 3px 3px 0px 0px var(--border-color);
+}
+
+.copy-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* Purchase Section */
+.purchase-section {
+    background: #ff99c8;
+    /* Light pinkish */
+    border: var(--border-width) solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    margin-top: 3rem;
+}
+
+.purchase-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.purchase-subtitle {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.payment-card {
+    background: #ffffff;
+    border: var(--border-width) solid var(--border-color);
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0px 0px var(--border-color);
+    transition: transform 0.1s;
+}
+
+.payment-card:hover {
+    transform: scale(1.02);
+}
+
+.payment-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    background: none !important;
+    /* Remove gradients */
+}
+
+.payment-card h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.payment-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: var(--text-color);
+    border: var(--border-width) solid var(--border-color);
+    font-weight: 900;
+    text-transform: uppercase;
+    background: #a2d2ff;
+    box-shadow: 3px 3px 0px 0px var(--border-color);
+    transition: all 0.1s;
+}
+
+.payment-btn:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0px 0px var(--border-color);
+}
+
+.payment-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+/* Specific colors for specific buttons */
+.paypal-btn {
+    background: #bde0fe;
+}
+
+.crypto-btn {
+    background: #ffc8dd;
+}
+
+.card-btn {
+    background: #cdb4db;
+}
+
+
+.purchase-note {
+    background: #ffffff;
+    border: var(--border-width) solid var(--border-color);
+    padding: 1rem;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: var(--border-width) solid var(--border-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Animations - Minimal/Jerky if any */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .logo-img,
+    .logo-fallback {
+        width: 100px;
+        height: 100px;
+    }
+}
