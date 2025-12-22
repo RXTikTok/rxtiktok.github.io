@@ -1,22 +1,22 @@
 {
- "name": "RXTikTok",
- "identifier": "com.zhiliaoapp.musically",
- "apps": [
-  {
-   "beta": false,
-   "name": "RXTikTok",
-   "bundleIdentifier": "com.zhiliaoapp.musically",
-   "developerName": "raulsaeed",
-   "subtitle": "An awesome TikTok Tweak.",
-   "version": "1.4.5",
-   "versionDate": "2025-08-11T11:36:00+02:00",
-   "versionDescription": "",
-   "downloadURL": "https://github.com/RXTikTok/rxtiktok.github.io/releases/download/1.4.5/TikTok-v41.1.0-RX-v1.4.5.ipa",
-   "localizedDescription": "*CHANGELOG* **↓**\n*ADDED:*\n- HD Private Video Downloading (must be following user, obviously)\n- Anonymous Profile Viewing\n- Save Your RX Config to the Keychain\n- Disable Story Photo Auto-Advance\n- Story Video Looping\n- Remove TikTok Referral ADs\n- Mark As Read Upon Reply\n- Disable Screenshot & Screen Recording Detection in DMs\n- Instant RX Language Change (full restart still required for complete translation)\n- Code Optimization\n\n*FIXED:*\n- Liking Posts, DM Requests, Reposting\n- Photo Downloading\n- \"Saved\" Banner Dismissing\n- Offline Video Downloading\n- Profile Picture Downloading\n- USA Region (just added back to selection list, unsure if it works)\n- Offline Videos Slider (now counts properly)\n\n*CHANGED:*\n- Settings Style Re-Format\n\n*REMOVED:*\n- Creator Profile Pull (broken)\n- Extended Bio Character Limit (now server-sided)\n\nChangelog 1.4.5: https://t.me/BHTikTokPlusPlus/194",
-   "iconURL": "https://github.com/raulsaeed/RXRepo.github.io/blob/main/RXLogo.jpg?raw=true",
-   "tintColor": "9b54fd",
-   "size": 316025922,
-   "screenshotURLs": []
-  }
- ]
+    "name": "RXTikTok",
+    "identifier": "com.zhiliaoapp.musically",
+    "apps": [
+        {
+            "beta": false,
+            "name": "RXTikTok",
+            "bundleIdentifier": "com.zhiliaoapp.musically",
+            "developerName": "raulsaeed",
+            "subtitle": "The Most Awesome TikTok Tweak for iOS",
+            "version": "1.5.4",
+            "versionDate": "2025-11-30T11:36:00+02:00",
+            "versionDescription": "",
+            "downloadURL": "https://github.com/RXTikTok/rxtiktok.github.io/releases/download/1.5.4/RXTiktok-v1.5.4_42.7.0.ipa",
+            "localizedDescription": "RXTikTok 1.5.4 RELEASE:\n\nADDED:\n- Anonymous Activity Status (read the alert prior to reporting an issue!)\n- Bypass Follow Count Search Bar Limit of 5k\n- English Strings Completely Rewritten\n- Remove Shop Videos\n- Play in Native Player\n- Download DM Media\n- Disable Double-Tap on Feed\n- Disable Double-Tap on Stories\n- Toggle to Show “Auto-Scroll” in Unsupported Regions\n- Account Region Info in “Video Info”\n- Remove “Find Similar” Button when Pausing a Video\n- Remove “Tako AI” Button above Users’ Profile Pictures\n- Story Like Confirmation\nFIXED:\n- “Always Open in Safari” Re-Added\n- Importing Settings\n- Follow Confirmation in Profiles\n- Tab Bar Labels Toggle\n- Confirmations for Actions\n- Channel Link in Credits\nCHANGED:\n- Full Country Names shown on “Video Info”\n- More JB Detection Changes\nREMOVED:\n- Comment Redesign \n- Comment Mass Reply Unfold",
+            "iconURL": "https://github.com/raulsaeed/RXRepo.github.io/blob/main/RXLogo.jpg?raw=true",
+            "tintColor": "9b54fd",
+            "size": 338937848,
+            "screenshotURLs": []
+        }
+    ]
 }
